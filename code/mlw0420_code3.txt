@@ -1,0 +1,85 @@
+% Define the time vector
+t = linspace(-3, 3, 1000);
+
+% Define the frequency vector
+f = linspace(-30, 30, 1000);
+
+% Define xt(t)
+x = sinc(t);
+
+% Define yt(t)
+y = x.*cos(20*pi*t);
+
+% Define yd(t)
+yd = y.*cos(20*pi*t);
+
+% Calculate the magnitude of the Fourier transform of y(t)
+Y_mag = abs((1/2)*rectangularPulse((f-10)) + (1/2)*rectangularPulse((f+10)));
+
+% Calculate the magnitude of the Fourier transform of yd(t)
+Yd_mag = abs((1/4)*(rectangularPulse((f-20)) + rectangularPulse((f+20))) + (1/2)*rectangularPulse(f));
+
+%Only the '(1/2)rect(f)' in Yd(f) is within the LPF cutoff of 1Hz
+Yf = (1/2)*rectangularPulse(t);
+
+%FT of Yf is yf = (1/2)sinc(t)
+yf = (1/2)*sinc(t);
+
+% Plot x(t)
+figure;
+plot(t, x)
+title('xt(t)')
+xlabel('Time (s)')
+ylabel('Amplitude')
+
+figure;
+% Plot the magnitude of the Fourier transform of x(t)
+plot(f, abs(rectangularPulse(f)))
+title('Xt(f)')
+xlabel('Frequency (Hz)')
+ylabel('Magnitude')
+xlim([-2,2]);
+
+% Plot y(t)
+figure;
+plot(t, y)
+title('yt(t)')
+xlabel('Time (s)')
+ylabel('Amplitude')
+
+figure;
+% Plot the magnitude of the Fourier transform of y(t)
+plot(f, Y_mag)
+title('Yt(f)')
+xlabel('Frequency (Hz)')
+ylabel('Magnitude')
+xlim([-15,15]);
+
+% Plot yd(t)
+figure;
+plot(t, yd)
+title('yd(t)')
+xlabel('Time (s)')
+ylabel('Amplitude')
+
+figure;
+% Plot the magnitude of the Fourier transform of yd(t)
+plot(f, Yd_mag)
+title('Yd(f)')
+xlabel('Frequency (Hz)')
+ylabel('Magnitude')
+xlim([-30,30]);
+
+figure;
+plot(t, yf)
+title('yf(t)')
+xlabel('Time (s)')
+ylabel('Amplitude')
+
+figure;
+plot(t, Yf)
+title('Yf(f)')
+xlabel('Frequency (Hz)')
+ylabel('Magnitude')
+xlim([-2,2]);
+
